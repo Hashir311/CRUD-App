@@ -1,0 +1,36 @@
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Virtual environment
+env/
+
+# Instance folder (typically used for configuration and logs)
+instance/
+
+# Environment configuration files
+.env
+
+# MacOS specific
+.DS_Store
+
+# Logs
+*.log
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# Static and templates might not need to be ignored unless generated or temporary
+# static/
+# templates/
+
+# Dependency directories
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Other files to ignore
+*.sqlite3
