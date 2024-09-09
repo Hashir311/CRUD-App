@@ -1,36 +1,60 @@
 {% extends 'base.html'%} {% block head %}
 <title>TAsk TRacker</title>
 {%endblock%} {% block body %}
+
+<div class="inpt">
+  <form action="/" method="POST">
+    <input type="text" name="content" id="content" /> <br />
+    <input type="submit" value="ADD TASK" id="add_task" />
+  </form>
+</div>
+
 <div class="content">
   {% if tasks | length < 1 %}
   <h3>No Task here... Create one</h3>
   {% else%}
   <table>
     <tr>
+      <th><b>#</b></th>
       <th><b>Task</b></th>
       <th><b>Date</b></th>
       <th><b>Actions</b></th>
     </tr>
     {% for task in tasks%}
     <tr>
+      <th>{{ loop.index }}.</th>
+      {% if task.complete %}
+      <th><s>{{task.content}}</s></th>
+      {% else %}
       <th>{{task.content}}</th>
-      <th>{{task.created.strftime("%d-%m-%y")}}</th>
+      {% endif %}
       <th>
-        <a href="/delete/{{ task.id }}" method="POST" style="display: inline">
-          <button type="submit" class="btn btn-delete">Delete</button>
+        {{task.created.strftime("%d-%m-%y")}} at
+        {{task.created.strftime("%H-%M")}}
+      </th>
+      <th>
+        <a href="/edit/{{ task.id }}" method="POST" style="display: inline">
+          <button type="button" class="btn-edit">Edit</button>
         </a>
-        <a href="/edit/{{ task.id }}">
-          <button type="button" class="btn btn-edit">Edit</button>
+        <a
+          href="/completed/{{ task.id }}"
+          method="POST"
+          style="display: inline"
+        >
+          {% if task.complete %}
+          <button type="button" class="btn-incomplete">Incomplete</button>
+          {% else %}
+          <button type="button" class="btn-complete">Complete</button>
+          {% endif %}
+        </a>
+        <a href="/delete/{{ task.id }}" method="POST" style="display: inline">
+          <button type="button" class="btn-delete">Delete</button>
         </a>
       </th>
     </tr>
     {% endfor %}
   </table>
   {% endif %}
-  <form action="/" method="POST">
-    <input type="text" name="content" id="content" />
-    <input type="submit" value="ADD TASK" id="add_task" />
-  </form>
 </div>
 {% if error%}
 <h4>Task cannot be empty</h4>

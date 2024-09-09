@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect, request
-from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -59,7 +58,19 @@ def edit(id):
     else:
         return render_template('edit.html', task=ed_task) 
 
-
+@app.route("/completed/<int:id>")
+def complete(id):
+    com_task = MyTask.query.get_or_404(id)
+    if com_task.complete == 0:
+        com_task.complete = 1     
+    else:
+        com_task.complete = 0
+    try:
+        db.session.commit()
+        return redirect("/")
+    except Exception as e:
+        return f"ERROR:{e}"
+        
     # return render_template('index.html')
 
 if __name__ == "__main__":

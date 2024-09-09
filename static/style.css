@@ -1,9 +1,35 @@
 /* General styling */
+header {
+    position: sticky;
+    top: 0;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 1000;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
 body {
+    position: relative;
+    min-height: 100vh; 
+    margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
 }
 
 h1 {
@@ -20,7 +46,20 @@ h3 {
     color: #555;
 }
 
-.content {
+.inpt{
+    position: sticky;
+    top: 50px;
+    z-index: 10;
+    width: 80%;
+    margin: 5px auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); 
+    padding: 5px;
+}
+
+.content{
     width: 80%;
     margin: 0 auto;
     padding: 20px;
@@ -46,6 +85,10 @@ th, td {
     padding: 12px;
 }
 
+s{
+    color: #ac9797; 
+}
+
 th {
     background-color: #f2f2f2;
     color: #333;
@@ -56,9 +99,6 @@ td a {
     color: #007BFF;
 }
 
-td a:hover {
-    text-decoration: underline;
-}
 
 /* Styling the form */
 form {
@@ -77,7 +117,7 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #007BFF;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -87,9 +127,51 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #0263ca;
 }
 
+button{
+    border: none;
+    border-radius: 3px;
+    transition: transform 0.2s ease;
+}
+button:hover{
+    border: 1px solid #ffffff;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    color: white;
+}
+.btn-delete:hover {
+    background-color: #c0392b; 
+}
+
+.btn-edit {
+    background-color: #3498db; 
+    color: white;
+}
+.btn-edit:hover {
+    background-color: #2980b9;
+}
+
+.btn-complete {
+    background-color: #2ecc71; 
+    color: white;
+}
+.btn-complete:hover {
+    background-color: #27ae60;
+}
+
+.btn-incomplete {
+    background-color: #f1c40f;
+    color: white;
+} 
+.btn-incomplete:hover {
+    background-color: #f39c12;
+}
 h4 {
     color: red;
     text-align: center;
