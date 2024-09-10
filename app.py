@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
 app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
 db = SQLAlchemy(app)
 
@@ -19,10 +19,9 @@ class MyTask(db.Model):
         return f"Task {self.id}"
     
 
-if not os.path.exists('tasks.db'):
-    with app.app_context():
-        db.create_all()
-        print("Database tables created!")   
+with app.app_context():
+    db.create_all()
+        
 
 @app.route('/',methods=["POST","GET"])
 def index():
