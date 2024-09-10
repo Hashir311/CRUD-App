@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"
@@ -18,8 +19,10 @@ class MyTask(db.Model):
         return f"Task {self.id}"
     
 
-with app.app_context():
-    db.create_all()    
+if not os.path.exists('tasks.db'):
+    with app.app_context():
+        db.create_all()
+        print("Database tables created!")   
 
 @app.route('/',methods=["POST","GET"])
 def index():
@@ -66,17 +69,12 @@ def edit(id):
 @app.route("/completed/<int:id>")
 def complete(id):
     com_task = MyTask.query.get_or_404(id)
-    if com_task.complete == 0:
-        com_task.complete = 1     
-    else:
-        com_task.complete = 0
+    com_task.complete = 1 - com_task.complete
     try:
         db.session.commit()
         return redirect("/")
     except Exception as e:
         return f"ERROR:{e}"
         
-    # return render_template('index.html')
-
 if __name__ == "__main__":
     app.run(debug=True)
